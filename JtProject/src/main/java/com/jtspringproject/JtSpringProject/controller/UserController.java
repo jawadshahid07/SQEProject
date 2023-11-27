@@ -38,6 +38,9 @@ public class UserController{
 	@Autowired
 	private productService productService;
 
+	@Autowired
+	private cartService cartService;
+
 	@GetMapping("/register")
 	public String registerUser()
 	{
@@ -185,12 +188,18 @@ public class UserController{
 		return "updateProfile";
 	}
 
+	@GetMapping("/user/cart")
+	public ModelAndView viewCart(@CookieValue(value = "username", defaultValue = "") String username) {
+		ModelAndView mView = new ModelAndView("cartproduct");
 
-//	@GetMapping("carts")
-//	public ModelAndView  getCartDetail()
-//	{
-//		ModelAndView mv= new ModelAndView();
-//		List<Cart>carts = cartService.getCarts();
-//	}
+		try {
+			//List<Cart> cartItems = cartService.getCartItemsByUsername(username);
+			//mView.addObject("cartItems", cartItems);
+		} catch (Exception e) {
+			mView.addObject("errorMsg", "Error retrieving cart items: " + e.getMessage());
+		}
+
+		return mView;
+	}
 	  
 }
