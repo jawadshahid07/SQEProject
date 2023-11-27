@@ -63,7 +63,8 @@ public class UserController{
 		User u = this.userService.checkLogin(username, pass);
 		System.out.println(u.getUsername());
 		if(u.getUsername().equals(username)) {	
-			
+
+			usernameforclass = username;
 			res.addCookie(new Cookie("username", u.getUsername()));
 			ModelAndView mView  = new ModelAndView("index");	
 			mView.addObject("user", u);
@@ -149,6 +150,40 @@ public class UserController{
 			
 			
 		}
+
+		String usernameforclass = "";
+	@GetMapping("profileDisplay")
+	public String profileDisplay(Model model) {
+		String displayusername,displaypassword,displayemail,displayaddress;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommjava","root","1234");
+			PreparedStatement stmt = con.prepareStatement("select * from customer where username = ?"+";");
+			stmt.setString(1, usernameforclass);
+			ResultSet rst = stmt.executeQuery();
+
+			if(rst.next())
+			{
+				int userid = rst.getInt(1);
+				displayusername = rst.getString(2);
+				displayemail = rst.getString(3);
+				displaypassword = rst.getString(4);
+				displayaddress = rst.getString(5);
+				model.addAttribute("userid",userid);
+				model.addAttribute("username",displayusername);
+				model.addAttribute("email",displayemail);
+				model.addAttribute("password",displaypassword);
+				model.addAttribute("address",displayaddress);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception:"+e);
+		}
+		System.out.println("Hello");
+		return "updateProfile";
+	}
 
 
 //	@GetMapping("carts")
