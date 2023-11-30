@@ -64,8 +64,7 @@ public class UserController{
 		
 		System.out.println(pass);
 		User u = this.userService.checkLogin(username, pass);
-		System.out.println(u.getUsername());
-		if(u.getUsername().equals(username)) {	
+		if(u.getUsername() != null && u.getUsername().equals(username)) {
 
 			usernameforclass = username;
 			res.addCookie(new Cookie("username", u.getUsername()));
@@ -82,7 +81,7 @@ public class UserController{
 
 		}else {
 			ModelAndView mView = new ModelAndView("userLogin");
-			mView.addObject("msg", "Please enter correct email and password");
+			mView.addObject("msg", "Please enter correct username and password");
 			return mView;
 		}
 		

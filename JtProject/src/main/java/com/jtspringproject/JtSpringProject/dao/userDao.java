@@ -50,13 +50,12 @@ public class userDao {
 			System.out.println(user.getPassword());
 			if(password.equals(user.getPassword())) {
 				return user;
-			}else {		
+			}else {
 				return new User();
 			}
 		}catch(Exception e){
 			System.out.println(e.getMessage());
-			User user = new User();
-			return user;
+			return new User();
 		}
     	
     }
