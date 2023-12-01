@@ -53,7 +53,7 @@ public class UserController{
 		return "buy";
 	}
 
-	@GetMapping("/logout")
+	@GetMapping({"/logout", "/"})
 	public String logout(HttpServletResponse res) {
 		Cookie usernameCookie = new Cookie("username", "");
 		usernameCookie.setMaxAge(0);
