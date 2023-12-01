@@ -4,6 +4,24 @@
 ## New Upgrade ( what's new)
 - bug fixed (syntax error: execute->executeQuery) (AdminController: 240)
 - bug fixed (table name: user->customer, column name uid->id) (AdminController: 238, 273)
+
+## Running Unit Tests
+
+To run the JUnit tests for this project, follow these steps:
+
+1. Ensure you have Maven installed. If not, download and install it from [Maven official website](https://maven.apache.org/download.cgi).
+
+2. Open a terminal or command prompt.
+
+3. Navigate to the project's root directory.
+
+4. Run the following command to execute all tests:
+   ```bash
+   mvn test
+5. If you want to run specific tests, you can use the following command:
+   ```bash
+   mvn -Dtest=TestClass1,TestClass2 test
+
   
 ## Quickstart
 
