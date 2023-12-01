@@ -38,6 +38,9 @@ public class UserController{
 	@Autowired
 	private productService productService;
 
+	@Autowired
+	private cartService cartService;
+
 	@GetMapping("/register")
 	public String registerUser()
 	{
@@ -61,9 +64,9 @@ public class UserController{
 		
 		System.out.println(pass);
 		User u = this.userService.checkLogin(username, pass);
-		System.out.println(u.getUsername());
-		if(u.getUsername().equals(username)) {	
-			
+		if(u.getUsername() != null && u.getUsername().equals(username)) {
+
+			usernameforclass = username;
 			res.addCookie(new Cookie("username", u.getUsername()));
 			ModelAndView mView  = new ModelAndView("index");	
 			mView.addObject("user", u);
@@ -78,7 +81,7 @@ public class UserController{
 
 		}else {
 			ModelAndView mView = new ModelAndView("userLogin");
-			mView.addObject("msg", "Please enter correct email and password");
+			mView.addObject("msg", "Please enter correct username and password");
 			return mView;
 		}
 		
@@ -150,12 +153,52 @@ public class UserController{
 			
 		}
 
+		String usernameforclass = "";
+	@GetMapping("profileDisplay")
+	public String profileDisplay(Model model) {
+		String displayusername,displaypassword,displayemail,displayaddress;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommjava","root","1234");
+			PreparedStatement stmt = con.prepareStatement("select * from customer where username = ?"+";");
+			stmt.setString(1, usernameforclass);
+			ResultSet rst = stmt.executeQuery();
 
-//	@GetMapping("carts")
-//	public ModelAndView  getCartDetail()
-//	{
-//		ModelAndView mv= new ModelAndView();
-//		List<Cart>carts = cartService.getCarts();
-//	}
+			if(rst.next())
+			{
+				int userid = rst.getInt(1);
+				displayusername = rst.getString(2);
+				displayemail = rst.getString(3);
+				displaypassword = rst.getString(4);
+				displayaddress = rst.getString(5);
+				model.addAttribute("userid",userid);
+				model.addAttribute("username",displayusername);
+				model.addAttribute("email",displayemail);
+				model.addAttribute("password",displaypassword);
+				model.addAttribute("address",displayaddress);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception:"+e);
+		}
+		System.out.println("Hello");
+		return "updateProfile";
+	}
+
+	@GetMapping("/user/cart")
+	public ModelAndView viewCart(@CookieValue(value = "username", defaultValue = "") String username) {
+		ModelAndView mView = new ModelAndView("cartproduct");
+
+		try {
+			//List<Cart> cartItems = cartService.getCartItemsByUsername(username);
+			//mView.addObject("cartItems", cartItems);
+		} catch (Exception e) {
+			mView.addObject("errorMsg", "Error retrieving cart items: " + e.getMessage());
+		}
+
+		return mView;
+	}
 	  
 }

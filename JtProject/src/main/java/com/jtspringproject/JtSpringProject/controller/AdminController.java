@@ -42,7 +42,7 @@ public class AdminController {
 	public String returnIndex() {
 		adminlogcheck =0;
 		usernameforclass = "";
-		return "userLogin";
+		return "adminlogin";
 	}
 	
 	

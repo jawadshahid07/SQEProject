@@ -11,6 +11,7 @@ category_id int unique key not null auto_increment primary key,
 name        varchar(255) null
 );
 
+
 # insert default categories
 INSERT INTO CATEGORY(name) VALUES ('Fruits'),
                                   ('Vegetables'),
