@@ -52,13 +52,16 @@ public class UserController{
 	{
 		return "buy";
 	}
-	
 
-	@GetMapping("/")
-	public String userlogin(Model model) {
-		
+	@GetMapping("/logout")
+	public String logout(HttpServletResponse res) {
+		Cookie usernameCookie = new Cookie("username", "");
+		usernameCookie.setMaxAge(0);
+		res.addCookie(usernameCookie);
+
 		return "userLogin";
 	}
+
 	@RequestMapping(value = "userloginvalidate", method = RequestMethod.POST)
 	public ModelAndView userlogin( @RequestParam("username") String username, @RequestParam("password") String pass,Model model,HttpServletResponse res) {
 		
@@ -111,7 +114,7 @@ public class UserController{
 		user.setRole("ROLE_NORMAL");
 		this.userService.addUser(user);
 		
-		return "redirect:/";
+		return "userLogin";
 	}
 	
 	
