@@ -1,24 +1,20 @@
-package com.jtspringproject.JtSpringProject.controllerTests;
+package controllerTests;
 
 import com.jtspringproject.JtSpringProject.controller.AdminController;
 import com.jtspringproject.JtSpringProject.controller.UserController;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.junit.Assert.assertEquals;
 
 public class UserControllerTest {
 
-    private UserController userController;
-
-    @Before
-    public void setUp() {
-        userController = new UserController();
-    }
     @Test
     public void testProfileDisplay() {
+        UserController userController = new UserController();
         String profileDisplay = userController.profileDisplay(new ConcurrentModel());
 
         assertEquals("updateProfile", profileDisplay);
@@ -26,6 +22,7 @@ public class UserControllerTest {
 
     @Test
     public void testUserCart() {
+        UserController userController = new UserController();
         ModelAndView mView = userController.viewCart("lisa");
 
         assertEquals("cartproduct", mView.getViewName());

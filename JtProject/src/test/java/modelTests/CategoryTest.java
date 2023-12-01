@@ -1,4 +1,4 @@
-package com.jtspringproject.JtSpringProject.modelTests;
+package modelTests;
 
 import com.jtspringproject.JtSpringProject.models.Category;
 import org.junit.jupiter.api.Test;

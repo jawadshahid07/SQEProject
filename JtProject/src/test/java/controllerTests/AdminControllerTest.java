@@ -1,26 +1,17 @@
-package com.jtspringproject.JtSpringProject.controllerTests;
+package controllerTests;
 
 import com.jtspringproject.JtSpringProject.controller.AdminController;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.ui.ConcurrentModel;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.HttpServletBean;
-import org.springframework.web.servlet.ModelAndView;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.springframework.ui.ConcurrentModel;
+
 
 public class AdminControllerTest {
 
-    private AdminController adminController;
-
-    @Before
-    public void setUp() {
-        adminController = new AdminController();
-    }
     @Test
     public void testLogout() {
+        AdminController adminController = new AdminController();
         String loginPage = adminController.returnIndex();
 
         assertEquals("adminlogin", loginPage);
@@ -28,6 +19,7 @@ public class AdminControllerTest {
 
     @Test
     public void testAdminHome() {
+        AdminController adminController = new AdminController();
         String result = adminController.adminHome(new ConcurrentModel());
 
         assertEquals("redirect:/admin/login", result);

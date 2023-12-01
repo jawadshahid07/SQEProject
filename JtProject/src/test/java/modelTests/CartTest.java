@@ -1,4 +1,4 @@
-package com.jtspringproject.JtSpringProject.modelTests;
+package modelTests;
 
 import com.jtspringproject.JtSpringProject.models.Cart;
 import com.jtspringproject.JtSpringProject.models.Product;
