@@ -11,6 +11,7 @@ category_id int unique key not null auto_increment primary key,
 name        varchar(255) null
 );
 
+
 # insert default categories
 INSERT INTO CATEGORY(name) VALUES ('Fruits'),
                                   ('Vegetables'),
@@ -62,3 +63,9 @@ CREATE INDEX FK7u438kvwr308xcwr4wbx36uiw
 
 CREATE INDEX FKt23apo8r9s2hse1dkt95ig0w5
     ON PRODUCT (customer_id);
+
+select * from CATEGORY
+select * from PRODUCT
+select * from CUSTOMER
+
+SHOW TABLES;

@@ -1,8 +1,8 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.text.*"%>
-<%@page import ="java.io.FileOutputStream" %>    
-<%@page import=" java.io.ObjectOutputStream" %>    
+<%@page import ="java.io.FileOutputStream" %>
+<%@page import=" java.io.ObjectOutputStream" %>
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -56,7 +56,7 @@
 				<th scope="col">Price</th>
 				<th scope="col">Description</th>
 				<th scope="col">Delete</th>
-				
+
 			</tr>
 			<tbody>
 				<tr>
@@ -81,14 +81,14 @@
 					</td>
 					<td>
 						<%= rs.getString(3) %>
-						
+
 					</td>
 					<td>
 						<%= rs.getString(4) %>
-						
+
 					</td>
-					
-					
+
+
 
 					<td>
 					<form action="cart/delete" method="get">
@@ -96,7 +96,7 @@
 							<input type="submit" value="Delete" class="btn btn-danger">
 					</form>
 					</td>
-					
+
 
 				</tr>
 				<%
