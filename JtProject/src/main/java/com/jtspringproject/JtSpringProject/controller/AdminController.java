@@ -80,8 +80,8 @@ public class AdminController {
 	public ModelAndView adminlogin( @RequestParam("username") String username, @RequestParam("password") String pass) {
 		
 		User user=this.userService.checkLogin(username, pass);
-		
-		if(user.getRole().equals("ROLE_ADMIN")) {
+
+		if( user != null && user.getRole() != null && user.getRole().equals("ROLE_ADMIN")) {
 			ModelAndView mv = new ModelAndView("adminHome");
 			adminlogcheck=1;
 			mv.addObject("admin", user);
@@ -92,9 +92,12 @@ public class AdminController {
 			mv.addObject("msg", "Please enter correct username and password");
 			return mv;
 		}
+
 	}
+
 	@GetMapping("categories")
 	public ModelAndView getcategory() {
+
 		if(adminlogcheck==0){
 			ModelAndView mView = new ModelAndView("adminlogin");
 			return mView;
@@ -118,15 +121,18 @@ public class AdminController {
 			return "redirect:categories";
 		}
 	}
-	
+
 	@GetMapping("categories/delete")
-	public ModelAndView removeCategoryDb(@RequestParam("id") int id)
-	{	
-			this.categoryService.deleteCategory(id);
-			ModelAndView mView = new ModelAndView("forward:/categories");
-			return mView;
+	public ModelAndView removeCategoryDb(@RequestParam("id") int id) {
+		boolean canDelete = this.categoryService.deleteCategory(id);
+
+		ModelAndView mView = new ModelAndView("redirect:/admin/categories");
+		if(!canDelete) {
+			mView.addObject("delete", true);
+		}
+		return mView;
 	}
-	
+
 	@GetMapping("categories/update")
 	public String updateCategory(@RequestParam("categoryid") int id, @RequestParam("categoryname") String categoryname)
 	{
