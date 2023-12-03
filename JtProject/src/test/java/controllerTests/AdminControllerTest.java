@@ -25,6 +25,5 @@ public class AdminControllerTest {
         assertEquals("redirect:/admin/login", result);
     }
 
-
 }
 
