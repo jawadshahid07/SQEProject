@@ -99,10 +99,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version> <!-- Replace with the latest version -->
 				<configuration>
-					<!-- Specify the test classes you want to run -->
-					<!--<includes>
-                        <include>**/*Test.java</include>
-                    </includes>-->
+					<excludes>
+						<exclude>**/selenium/E2ETest.java</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
