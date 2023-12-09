@@ -1,8 +1,6 @@
 package controllerTests;
 
-import com.jtspringproject.JtSpringProject.controller.AdminController;
 import com.jtspringproject.JtSpringProject.controller.UserController;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
